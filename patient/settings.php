@@ -395,6 +395,8 @@
 
                 );
 
+                
+
             if($error_1!='4'){
                     echo '
                     <div id="popup1" class="overlay">
