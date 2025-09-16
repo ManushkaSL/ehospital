@@ -395,7 +395,7 @@
 
                 );
 
-                
+
 
             if($error_1!='4'){
                     echo '
@@ -415,7 +415,7 @@
                                     <tr>
                                         <td>
                                             <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Edit User Account Details.</p>
-                                        User ID : '.$id.' (Auto Generated)<br><br>
+                                        <br><br>
                                         </td>
                                     </tr>
                                     <tr>
