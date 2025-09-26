@@ -65,6 +65,14 @@
                                     <a href="../logout.php" ><input type="button" value="Log out" class="logout-btn btn-primary-soft btn"></a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2" style="padding-top:10px;">
+                                    <a href="change-password.php">
+                                        <input type="button" value="Change Password" class="logout-btn btn-primary-soft btn">
+                                    </a>
+                                </td>
+                            </tr>
+
                     </table>
                     </td>
                 </tr>
