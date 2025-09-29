@@ -157,7 +157,7 @@
                     <tr>
                         <td >
                             <h3 class="image-text-dark">Welcome!</h3>
-                            <h1><?php echo $username  ?>.</h1>
+                            <h1 class="user-name"><?php echo $username  ?>.</h1>
                             <p class="image-text-dark">Thanks for joinnig with us. We are always trying to get you a complete service<br>
                             You can view your dailly schedule, Reach Patients Appointment at home!<br><br>
                             </p>

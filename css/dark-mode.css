@@ -137,7 +137,17 @@ body.dark-mode p.heading-main12 {
 body.dark-mode .image-text-dark {
     color: #65686c !important;
 }
+body.dark-mode div.heading-main12 {
+    color: #c7cdd4 !important;
+}
 
+body.dark-mode h1.user-name {
+    color: #0343c5 !important;
+}
+
+body.dark-mode a.non-style-link {
+    color: #0343c5 !important;
+}
 body.dark-mode .label-td label {
     color: #e7ebf1 !important;
 }
