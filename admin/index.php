@@ -101,6 +101,12 @@
                         <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">Patients</p></a></div>
                     </td>
                 </tr>
+                <!-- Added Drugs menu between Appointment and Patients -->
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-drugs">
+                        <a href="drugs.php" class="non-style-link-menu"><div><p class="menu-text">Drugs</p></div></a>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="dash-body" style="margin-top: 15px">
