@@ -1,0 +1,167 @@
+/* 🌙 DARK MODE GLOBAL STYLES */
+
+/* Whole page */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+
+
+/* Headings */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #e0e0e0 !important;
+}
+
+/* Links */
+body.dark-mode a {
+    color: #90caf9 !important;
+}
+body.dark-mode a:hover {
+    color: #ffffff !important;
+}
+
+/* Tables */
+body.dark-mode table {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}
+body.dark-mode th,
+body.dark-mode td {
+    color: #e0e0e0 !important;
+    border-color: #333 !important;
+}
+
+/* Forms / Inputs */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+}
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #90caf9 !important;
+    outline: none !important;
+}
+
+/* Placeholder */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: rgba(200, 200, 200, 0.6) !important;
+}
+
+/* Buttons */
+body.dark-mode .btn,
+body.dark-mode .btn-primary,
+body.dark-mode .login-btn {
+    background-color: #333 !important;
+    color: #fff !important;
+    border: 1px solid #555 !important;
+}
+
+/* Homepage-specific */
+body.dark-mode .full-height {
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+body.dark-mode .heading-text {
+    color: #e0e0e0 !important;
+}
+body.dark-mode .sub-text2 {
+    color: rgba(200, 200, 200, 0.7) !important;
+}
+body.dark-mode .edoc-logo {
+    color: #90caf9 !important;
+}
+body.dark-mode .edoc-logo-sub {
+    color: rgba(200, 200, 200, 0.7) !important;
+}
+body.dark-mode .nav-item {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+body.dark-mode .nav-item:hover {
+    color: #ffffff !important;
+}
+
+#darkModeToggle {
+    position: fixed;
+    top: 10px;        /* distance from top to stay below register button */
+    right: 5px;      /* distance from right edge */
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #333;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#darkModeToggle:hover {
+    background: #555;
+    transform: scale(1.1);
+}
+
+
+body.dark-mode p.dark-mode-text {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode p.profile-title {
+    color: #8cb0df !important;
+}
+
+body.dark-mode .h3-dashboard {
+    color: #a5b9d4 !important;
+}
+
+body.dark-mode p.heading-main12 {
+    color: #7f8b9c !important;
+}
+
+body.dark-mode .image-text-dark {
+    color: #65686c !important;
+}
+
+body.dark-mode .label-td label {
+    color: #e7ebf1 !important;
+}
+
+body.dark-mode .index-page {
+    background: url("../images/your-background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e !important;  /* dark background */
+    border: 1px solid #444 !important;     /* darker border */
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,0.5) !important; /* darker shadow */
+    color: #e0e0e0 !important;             /* text color inside */
+}
+
+
+
+/*Responsive adjustment */
+@media (max-width: 768px) {
+    #darkModeToggle {
+        top: 60px;    /* lower for mobile */
+        right: 10px;
+    }
+}
+
