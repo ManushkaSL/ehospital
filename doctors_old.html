@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors - eHospital</title>
+    <style>
+        /* Base styles from your existing CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:1" /><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:1" /></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/></svg>');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            background: rgba(26, 26, 26, 0.7);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Header styles */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .edoc-logo {
+            color: white;
+            font-weight: bolder;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .edoc-logo-sub {
+            color: rgba(255, 255, 255, 0.733);
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #f0f0f0;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Search and filter section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-input, .filter-select {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .filter-select {
+            min-width: 180px;
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Doctors grid */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .doctor-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .doctor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .doctor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .doctor-info h3 {
+            color: #333;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .doctor-info .specialty {
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .doctor-info .experience {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .doctor-details {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: #333;
+            font-size: 14px;
+            text-align: right;
+            max-width: 60%;
+        }
+
+        .contact-info {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .contact-info .detail-row {
+            margin-bottom: 8px;
+        }
+
+        .book-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .no-results {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            margin: 60px 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input, .filter-select {
+                width: 100%;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .doctor-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .doctor-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <!-- Header -->
+        <header class="header">
+            <div class="nav-container">
+                <div>
+                    <a href="index.html" class="edoc-logo">ehospital.</a>
+                    <span class="edoc-logo-sub">| THE ECHANNELING PROJECT</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-item">HOME</a>
+                    <a href="doctors.html" class="nav-item">DOCTORS</a>
+                    <a href="signup.php" class="nav-item">REGISTER</a>
+                    <a href="login.php" class="nav-item">LOGIN</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container">
+            <h1 class="page-title fade-in">Our Expert Doctors</h1>
+            <p class="page-subtitle fade-in">Find and connect with qualified healthcare professionals</p>
+
+            <!-- Search and Filter Section -->
+            <div class="search-section fade-in">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search doctors by name...">
+                    <select class="filter-select" id="specialtyFilter">
+                        <option value="">All Specialties</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="General Medicine">General Medicine</option>
+                    </select>
+                    <button class="search-btn" onclick="filterDoctors()">Search</button>
+                </div>
+            </div>
+
+            <!-- Doctors Grid -->
+            <div class="doctors-grid" id="doctorsGrid">
+                <!-- Doctors will be populated by JavaScript -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <h3>No doctors found matching your criteria</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo database of doctors
+        const doctors = [
+            {
+                id: 1,
+                name: "Dr. Sarah Johnson",
+                specialty: "Cardiology",
+                experience: "15 years of experience",
+                qualification: "MD, FACC",
+                hospital: "City General Hospital",
+                consultationFee: "$150",
+                phone: "+1-555-0123",
+                email: "sarah.johnson@hospital.com",
+                availability: "Mon-Fri 9AM-5PM",
+                description: "Specialized in heart disease prevention and treatment with extensive experience in interventional cardiology."
+            },
+            {
+                id: 2,
+                name: "Dr. Michael Chen",
+                specialty: "Dermatology",
+                experience: "12 years of experience",
+                qualification: "MD, Board Certified",
+                hospital: "Skin Care Center",
+                consultationFee: "$120",
+                phone: "+1-555-0124",
+                email: "michael.chen@skincare.com",
+                availability: "Tue-Sat 10AM-6PM",
+                description: "Expert in cosmetic and medical dermatology, specializing in skin cancer detection and treatment."
+            },
+            {
+                id: 3,
+                name: "Dr. Emily Rodriguez",
+                specialty: "Pediatrics",
+                experience: "10 years of experience",
+                qualification: "MD, FAAP",
+                hospital: "Children's Medical Center",
+                consultationFee: "$100",
+                phone: "+1-555-0125",
+                email: "emily.rodriguez@childcare.com",
+                availability: "Mon-Fri 8AM-6PM",
+                description: "Dedicated pediatrician focusing on child development and preventive care for infants to adolescents."
+            },
+            {
+                id: 4,
+                name: "Dr. James Wilson",
+                specialty: "Orthopedics",
+                experience: "18 years of experience",
+                qualification: "MD, FAAOS",
+                hospital: "Sports Medicine Institute",
+                consultationFee: "$180",
+                phone: "+1-555-0126",
+                email: "james.wilson@sports.com",
+                availability: "Mon-Thu 7AM-4PM",
+                description: "Orthopedic surgeon specializing in sports injuries and joint replacement procedures."
+            },
+            {
+                id: 5,
+                name: "Dr. Lisa Thompson",
+                specialty: "Neurology",
+                experience: "14 years of experience",
+                qualification: "MD, PhD",
+                hospital: "Neurological Institute",
+                consultationFee: "$200",
+                phone: "+1-555-0127",
+                email: "lisa.thompson@neuro.com",
+                availability: "Wed-Sun 9AM-5PM",
+                description: "Neurologist with expertise in epilepsy treatment and neurological disorder diagnosis."
+            },
+            {
+                id: 6,
+                name: "Dr. Robert Kumar",
+                specialty: "General Medicine",
+                experience: "20 years of experience",
+                qualification: "MBBS, MD",
+                hospital: "Community Health Center",
+                consultationFee: "$90",
+                phone: "+1-555-0128",
+                email: "robert.kumar@community.com",
+                availability: "Mon-Sat 8AM-8PM",
+                description: "Primary care physician providing comprehensive healthcare services for adults and families."
+            },
+            {
+                id: 7,
+                name: "Dr. Amanda Foster",
+                specialty: "Cardiology",
+                experience: "11 years of experience",
+                qualification: "MD, FACC",
+                hospital: "Heart Specialists Clinic",
+                consultationFee: "$160",
+                phone: "+1-555-0129",
+                email: "amanda.foster@heart.com",
+                availability: "Tue-Fri 9AM-4PM",
+                description: "Interventional cardiologist specializing in minimally invasive heart procedures."
+            },
+            {
+                id: 8,
+                name: "Dr. David Park",
+                specialty: "Orthopedics",
+                experience: "16 years of experience",
+                qualification: "MD, FAAOS",
+                hospital: "Bone & Joint Center",
+                consultationFee: "$170",
+                phone: "+1-555-0130",
+                email: "david.park@bone.com",
+                availability: "Mon-Wed 8AM-5PM",
+                description: "Orthopedic specialist focusing on spine surgery and complex fracture treatments."
+            }
+        ];
+
+        let filteredDoctors = [...doctors];
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('');
+        }
+
+        function createDoctorCard(doctor) {
+            return `
+                <div class="doctor-card fade-in">
+                    <div class="doctor-header">
+                        <div class="doctor-avatar">
+                            ${getInitials(doctor.name)}
+                        </div>
+                        <div class="doctor-info">
+                            <h3>${doctor.name}</h3>
+                            <div class="specialty">${doctor.specialty}</div>
+                            <div class="experience">${doctor.experience}</div>
+                        </div>
+                    </div>
+                    <div class="doctor-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Qualification:</span>
+                            <span class="detail-value">${doctor.qualification}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Hospital:</span>
+                            <span class="detail-value">${doctor.hospital}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Consultation Fee:</span>
+                            <span class="detail-value">${doctor.consultationFee}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Availability:</span>
+                            <span class="detail-value">${doctor.availability}</span>
+                        </div>
+                        <div class="contact-info">
+                            <div class="detail-row">
+                                <span class="detail-label">Phone:</span>
+                                <span class="detail-value">${doctor.phone}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value">${doctor.email}</span>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: #666; font-size: 14px; line-height: 1.5;">
+                            ${doctor.description}
+                        </p>
+                        <button class="book-btn" onclick="bookAppointment(${doctor.id})">
+                            Book Appointment
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDoctors(doctorsToRender) {
+            const grid = document.getElementById('doctorsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (doctorsToRender.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+                grid.innerHTML = doctorsToRender.map(createDoctorCard).join('');
+            }
+        }
+
+        function filterDoctors() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedSpecialty = document.getElementById('specialtyFilter').value;
+            
+            filteredDoctors = doctors.filter(doctor => {
+                const matchesSearch = doctor.name.toLowerCase().includes(searchTerm) ||
+                                    doctor.specialty.toLowerCase().includes(searchTerm) ||
+                                    doctor.description.toLowerCase().includes(searchTerm);
+                const matchesSpecialty = selectedSpecialty === '' || doctor.specialty === selectedSpecialty;
+                
+                return matchesSearch && matchesSpecialty;
+            });
+            
+            renderDoctors(filteredDoctors);
+        }
+
+        function bookAppointment(doctorId) {
+            const doctor = doctors.find(d => d.id === doctorId);
+            alert(`Booking appointment with ${doctor.name}. Please login or register to continue with the booking process.`);
+            // In a real application, you would redirect to login page or appointment booking form
+            // window.location.href = 'login.php';
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterDoctors);
+        document.getElementById('specialtyFilter').addEventListener('change', filterDoctors);
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDoctors(filteredDoctors);
+        });
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterDoctors();
+            }
+        });
+    </script>
+</body>
+</html>
