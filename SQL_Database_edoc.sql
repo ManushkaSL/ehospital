@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`aemail`, `apassword`) VALUES
-('admin@edoc.com', '$2y$10$c03p/cRo5siXU9ejYYPHhuYddQOY8sguSrHmZC61XKU0SHaxkSmhC');
+('admin@edoc.com', '$2y$10$Pzx2uc0I71R.we6IjGr0WuS95ucEQdErDHNzYwfBl6O9ElROg6I2.');
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `doctor` (
 --
 
 INSERT INTO `doctor` (`docid`, `docemail`, `docname`, `docpassword`, `docnic`, `doctel`, `specialties`) VALUES
-(1, 'doctor@edoc.com', 'Test Doctor', '$2y$10$PBbitywgQDSXZ/jON1Fz6uTrnrQf51G3B7z5QcqG3CCOaVfzjkDjq', '000000000', '0110000000', 1);
+(1, 'doctor@edoc.com', 'Test Doctor', '$2y$10$Pzx2uc0I71R.we6IjGr0WuS95ucEQdErDHNzYwfBl6O9ElROg6I2.', '000000000', '0110000000', 1);
 
 -- --------------------------------------------------------
 
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `patient` (
 --
 
 INSERT INTO `patient` (`pid`, `pemail`, `pname`, `ppassword`, `paddress`, `pnic`, `pdob`, `ptel`) VALUES
-(1, 'patient@edoc.com', 'Test Patient', '$2y$10$Y7dTzdk2yhAudWqQ5JMAY.JqRfXHr7hPOgfg4uB.WZyxg7jzDaj.6', 'Sri Lanka', '0000000000', '2000-01-01', '0120000000'),
-(2, 'emhashenudara@gmail.com', 'Hashen Udara', '$2y$10$m/JlSpIVGa.eGRdAK.84xuPOA0dxBOmkmsEyGKcgKHx2h5FCsM1Ry', 'Sri Lanka', '0110000000', '2022-06-03', '0700000000');
+(1, 'patient@edoc.com', 'Test Patient', '$2y$10$Pzx2uc0I71R.we6IjGr0WuS95ucEQdErDHNzYwfBl6O9ElROg6I2.', 'Sri Lanka', '0000000000', '2000-01-01', '0120000000'),
+(2, 'emhashenudara@gmail.com', 'Hashen Udara', '$2y$10$Pzx2uc0I71R.we6IjGr0WuS95ucEQdErDHNzYwfBl6O9ElROg6I2.', 'Sri Lanka', '0110000000', '2022-06-03', '0700000000');
 
 -- --------------------------------------------------------
 
@@ -254,3 +254,55 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+CREATE TABLE pending_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE,
+    name VARCHAR(100),
+    password VARCHAR(255),
+    address VARCHAR(255),
+    nic VARCHAR(20),
+    dob DATE,
+    tele VARCHAR(15),
+    token VARCHAR(64),
+    created_at DATETIME
+);
+
+CREATE TABLE treatment_details (
+    treatment_id INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_email VARCHAR(100) NOT NULL,
+    patient_email VARCHAR(100) NOT NULL,
+    doctor_type VARCHAR(50) NOT NULL,  
+    diagnosis TEXT,           
+    treatment_plan TEXT,      
+    prescribed_medicines TEXT,
+    treatment_date DATE NOT NULL,
+    followup_date DATE
+);
+
+CREATE TABLE ex_doctors (
+    ex_doctor_id INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_id INT NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    doctor_type VARCHAR(50) NOT NULL,
+    phone VARCHAR(20),
+    join_date DATE,
+    resign_date DATE,
+    reason_for_exit TEXT
+	);
+
+CREATE TABLE drugs (
+    drug_id INT AUTO_INCREMENT PRIMARY KEY,
+    drug_name VARCHAR(100) NOT NULL,
+    drug_type VARCHAR(50), 
+    manufacturer VARCHAR(100),
+    dosage_form VARCHAR(50),  
+    strength VARCHAR(50),  
+    quantity INT DEFAULT 0,
+    price DECIMAL(10,2),
+    expiry_date DATE,
+    added_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

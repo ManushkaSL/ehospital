@@ -22,7 +22,7 @@
     <?php
 
     //learn from w3schools.com
-
+    include("../connection.php");
     session_start();
 
     if(isset($_SESSION["user"])){
