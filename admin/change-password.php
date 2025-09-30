@@ -69,7 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Change Password</title>
     <link rel="stylesheet" href="../css/main.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="../css/dark-mode.css">
+=======
+>>>>>>> fc01e8e8126b1656b45de02d028e113830b370bd
     <style>
         body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f4f6f9; margin:0;}
         .container {display:flex;}

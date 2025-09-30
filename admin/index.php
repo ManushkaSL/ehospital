@@ -20,9 +20,8 @@
         .sub-table{
             animation: transitionIn-Y-bottom 0.5s;
         }
+       
     </style>
-    
-    
 </head>
 <body>
     <?php
@@ -63,7 +62,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="../logout.php" ><input type="button" value="Log out" class="logout-btn btn-primary-soft btn"></a>
+                                    <a href="../logout.php"><input type="button" value="Log out" class="logout-btn btn-primary-soft btn"></a>
                                 </td>
                             </tr>
                             <tr>
@@ -73,35 +72,53 @@
                                     </a>
                                 </td>
                             </tr>
-
-                    </table>
+                        </table>
                     </td>
                 </tr>
-                <tr class="menu-row" >
-                    <td class="menu-btn menu-icon-dashbord menu-active menu-icon-dashbord-active" >
-                        <a href="index.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Dashboard</p></a></div></a>
-                    </td>
-                </tr>
+                
                 <tr class="menu-row">
-                    <td class="menu-btn menu-icon-doctor ">
-                        <a href="doctors.php" class="non-style-link-menu "><div><p class="menu-text">Doctors</p></a></div>
+                    <td class="menu-btn menu-icon-dashbord menu-active menu-icon-dashbord-active">
+                        <a href="index.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Dashboard</p></div></a>
                     </td>
                 </tr>
-                <tr class="menu-row" >
+
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-doctor">
+                        <a href="doctors.php" class="non-style-link-menu"><div><p class="menu-text">Doctors</p></div></a>
+                    </td>
+                </tr>
+
+                <tr class="menu-row">
                     <td class="menu-btn menu-icon-schedule">
                         <a href="schedule.php" class="non-style-link-menu"><div><p class="menu-text">Schedule</p></div></a>
                     </td>
                 </tr>
+
                 <tr class="menu-row">
                     <td class="menu-btn menu-icon-appoinment">
-                        <a href="appointment.php" class="non-style-link-menu"><div><p class="menu-text">Appointment</p></a></div>
+                        <a href="appointment.php" class="non-style-link-menu"><div><p class="menu-text">Appointment</p></div></a>
                     </td>
                 </tr>
-                <tr class="menu-row" >
+
+                
+
+                <tr class="menu-row">
                     <td class="menu-btn menu-icon-patient">
-                        <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">Patients</p></a></div>
+                        <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">Patients</p></div></a>
                     </td>
                 </tr>
+                <!-- Added Drugs menu between Appointment and Patients -->
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-drugs">
+                        <a href="drugs.php" class="non-style-link-menu"><div><p class="menu-text">Drugs</p></div></a>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-delete-request">
+                        <a href="doctors-delete-request.php" class="non-style-link-menu"><div><p class="menu-text">Doctor Deletion Requests</p></div></a>
+                    </td>
+                </tr>
+
             </table>
         </div>
         <div class="dash-body" style="margin-top: 15px">
@@ -123,14 +140,13 @@
                                             $row00=$list11->fetch_assoc();
                                             $d=$row00["docname"];
                                             $c=$row00["docemail"];
-                                            echo "<option value='$d'><br/>";
-                                            echo "<option value='$c'><br/>";
+                                            echo "<option value='$d'>";
+                                            echo "<option value='$c'>";
                                         };
         
                                     echo ' </datalist>';
                                     ?>
-                                    
-                               
+                                  
                                     <input type="Submit" value="Search" class="login-btn btn-primary-soft btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
                                 
                                 </form>
@@ -152,8 +168,6 @@
                                 $doctorrow = $database->query("select  * from  doctor;");
                                 $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
                                 $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
-
-
                                 ?>
                                 </p>
                             </td>
@@ -232,11 +246,6 @@
                     </center>
                     </td>
                 </tr>
-
-
-
-
-
 
                 <tr>
                     <td colspan="4">
