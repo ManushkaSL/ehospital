@@ -294,3 +294,21 @@ CREATE TABLE ex_doctors (
     reason_for_exit TEXT
 	);
 
+CREATE TABLE drugs (
+    drug_id INT AUTO_INCREMENT PRIMARY KEY,
+    drug_name VARCHAR(100) NOT NULL,
+    drug_type VARCHAR(50), 
+    manufacturer VARCHAR(100),
+    dosage_form VARCHAR(50),  
+    strength VARCHAR(50),  
+    quantity INT DEFAULT 0,
+    price DECIMAL(10,2),
+    expiry_date DATE,
+    added_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE delete_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_id INT NOT NULL,
+    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending','approved','rejected') DEFAULT 'pending'
+);
