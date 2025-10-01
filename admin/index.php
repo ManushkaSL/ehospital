@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/animations.css">  
     <link rel="stylesheet" href="../css/main.css">  
+    <link rel="stylesheet" href="../css/dark-mode.css">
     <link rel="stylesheet" href="../css/admin.css">
         
     <title>Dashboard</title>
@@ -74,7 +75,7 @@
                         </table>
                     </td>
                 </tr>
-
+                
                 <tr class="menu-row">
                     <td class="menu-btn menu-icon-dashbord menu-active menu-icon-dashbord-active">
                         <a href="index.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Dashboard</p></div></a>
@@ -256,10 +257,11 @@
                                         echo date("l",strtotime("+1 week"));
                                         ?>
                                     </p>
-                                    <p style="padding-bottom:19px;padding-left:50px;font-size:15px;font-weight:500;color:#212529e3;line-height: 20px;">
+                                    <p class="dark-mode-text" style="padding-bottom:19px;padding-left:50px;font-size:15px;font-weight:500;line-height:20px;">
                                         Here's Quick access to Upcoming Appointments until 7 days<br>
                                         More details available in @Appointment section.
                                     </p>
+
 
                                 </td>
                                 <td>
@@ -268,7 +270,7 @@
                                         echo date("l",strtotime("+1 week"));
                                         ?>
                                     </p>
-                                    <p style="padding-bottom:19px;text-align:right;padding-right:50px;font-size:15px;font-weight:500;color:#212529e3;line-height: 20px;">
+                                    <p class="dark-mode-text" style="padding-bottom:19px;text-align:right;padding-right:50px;font-size:15px;font-weight:500;color:#212529e3;line-height: 20px;">
                                         Here's Quick access to Upcoming Sessions that Scheduled until 7 days<br>
                                         Add,Remove and Many features available in @Schedule section.
                                     </p>
@@ -483,6 +485,6 @@
         </div>
     </div>
 
-
+<script src="../darkmode.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/animations.css">  
     <link rel="stylesheet" href="../css/main.css">  
+    <link rel="stylesheet" href="../css/dark-mode.css">
     <link rel="stylesheet" href="../css/admin.css">
         
     <title>Dashboard</title>
@@ -161,9 +162,9 @@
                     <table class="filter-container doctor-header" style="border: none;width:95%" border="0" >
                     <tr>
                         <td >
-                            <h3>Welcome!</h3>
-                            <h1><?php echo $username  ?>.</h1>
-                            <p>Thanks for joinnig with us. We are always trying to get you a complete service<br>
+                            <h3 class="image-text-dark">Welcome!</h3>
+                            <h1 class="user-name"><?php echo $username  ?>.</h1>
+                            <p class="image-text-dark">Thanks for joinnig with us. We are always trying to get you a complete service<br>
                             You can view your dailly schedule, Reach Patients Appointment at home!<br><br>
                             </p>
                             <a href="appointment.php" class="non-style-link"><button class="btn-primary btn" style="width:30%">View My Appointments</button></a>
@@ -367,6 +368,6 @@
         </div>
     </div>
 
-
+<script src="../darkmode.js"></script>
 </body>
 </html>

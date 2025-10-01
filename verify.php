@@ -82,5 +82,6 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 }
 ?>
 </div>
+<script src="darkmode.js"></script>
 </body>
 </html>

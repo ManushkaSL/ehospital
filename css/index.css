@@ -12,13 +12,14 @@ html, body {
   }
   
 .full-height {
-    background: rgba(26, 26, 26, 0.548);
+    background: rgba(0, 0, 0, 0.7); /* overlay */
+    min-height: 100vh;             /* at least full viewport */
+    height: auto;                  /* allow scrolling */
     background-attachment: fixed;
-    max-height: 100vh;
-    height: 100vh;
-
-
 }
+
+
+
 table{
     width: 100%;
     padding-top: 5px;
@@ -84,4 +85,11 @@ table{
     left: 45%;
     font-size: 13px;
     animation: transitionIn-Y-over 0.5s;
+}
+
+/* Show background only on index page */
+body .index-page {
+    background: url("../img/bg01.jpg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
 }

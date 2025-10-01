@@ -232,4 +232,7 @@ if (isset($_POST['create_account']) && isset($_SESSION['otp_verified'])) {
 </div>
 
 </body>
+
+<script src="darkmode.js"></script>
+
 </html>
