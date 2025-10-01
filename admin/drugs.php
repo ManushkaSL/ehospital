@@ -43,6 +43,8 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
     <link rel="stylesheet" href="../css/animations.css">  
     <link rel="stylesheet" href="../css/main.css">  
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+
     <title>Manage Drugs</title>
     <style>
         .sub-table th, .sub-table td {
@@ -56,7 +58,6 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
         .form-container button {
             margin: 5px;
         }
-        
     </style>
 </head>
 <body>
@@ -78,7 +79,9 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="../logout.php"><input type="button" value="Log out" class="logout-btn btn-primary-soft btn"></a>
+                                    <a href="../logout.php">
+                                        <input type="button" value="Log out" class="logout-btn btn-primary-soft btn">
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
@@ -116,16 +119,22 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
                     </td>
                 </tr>
 
-                
-
                 <tr class="menu-row">
                     <td class="menu-btn menu-icon-patient">
                         <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">Patients</p></div></a>
                     </td>
                 </tr>
+
+                <!-- Active Drugs -->
                 <tr class="menu-row">
                     <td class="menu-btn menu-icon-drugs menu-active">
                         <a href="drugs.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Drugs</p></div></a>
+                    </td>
+                </tr>
+
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-delete-request">
+                        <a href="doctors-delete-request.php" class="non-style-link-menu"><div><p class="menu-text">Doctor Deletion Requests</p></div></a>
                     </td>
                 </tr>
             </table>
@@ -188,5 +197,6 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
             </table>
         </div>
     </div>
+    <script src="../darkmode.js"></script>
 </body>
 </html>

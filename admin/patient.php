@@ -90,7 +90,17 @@
                         <a href="patient.php" class="non-style-link-menu  non-style-link-menu-active"><div><p class="menu-text">Patients</p></a></div>
                     </td>
                 </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-drugs">
+                        <a href="drugs.php" class="non-style-link-menu"><div><p class="menu-text">Drugs</p></div></a>
+                    </td>
+                </tr>
 
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-delete-request">
+                        <a href="doctors-delete-request.php" class="non-style-link-menu"><div><p class="menu-text">Doctor Deletion Requests</p></div></a>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="dash-body">

@@ -13,13 +13,11 @@ $useremail = $database->real_escape_string($_SESSION["user"]);
 // fetch current doctor row
 $docrow = $database->query("SELECT * FROM doctor WHERE docemail='$useremail' LIMIT 1");
 if(!$docrow || $docrow->num_rows==0){
-    // invalid session user — redirect to login
     header("location: ../login.php");
     exit;
 }
 $docfetch = $docrow->fetch_assoc();
 $doctorname = $docfetch["docname"];
-// NOTE: your doctor table column is "specialites" in previous code — keep same spelling
 $specialty_id = isset($docfetch["specialties"]) ? $database->real_escape_string($docfetch["specialties"]) : '';
 
 // get specialty name if you have a specialties table
@@ -61,22 +59,17 @@ function h($s){
 <head>
     <meta charset="utf-8">
     <title>Other Doctors Activity</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/animations.css">  
     <link rel="stylesheet" href="../css/main.css">  
+    <link rel="stylesheet" href="../css/dark-mode.css">
     <link rel="stylesheet" href="../css/admin.css">
+    
     <style>
-        /* Blue theme styles */
         h2 {
             color: #1a73e8;
             font-weight: 600;
-        }
-        a.non-style-link {
-            color: #1a73e8;
-            font-weight: 500;
-            text-decoration: none;
-        }
-        a.non-style-link:hover {
-            text-decoration: underline;
         }
         .sub-table {
             border-collapse: collapse;
@@ -102,29 +95,69 @@ function h($s){
             text-align: center;
             color: #666;
         }
-        /* Blue button style for back link */
-        .blue-btn {
-            display: inline-block;
-            padding: 8px 14px;
-            background: #37afe2ff;
-            color: #fff !important;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s ease;
-        }
-        .blue-btn:hover {
-            background: #1558b0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="dash-body" style="margin-top: 15px">
-            <p style="padding-left:20px;">
-                <a class="blue-btn" href="index.php">&larr; Back to Dashboard</a>
-            </p>
+        <!-- ✅ Sidebar menu copied from index.php -->
+        <div class="menu">
+            <table class="menu-container" border="0">
+                <tr>
+                    <td style="padding:10px" colspan="2">
+                        <table border="0" class="profile-container">
+                            <tr>
+                                <td width="30%" style="padding-left:20px" >
+                                    <img src="../img/user.png" alt="" width="100%" style="border-radius:50%">
+                                </td>
+                                <td style="padding:0px;margin:0px;">
+                                    <p class="profile-title"><?php echo substr($doctorname,0,13) ?>..</p>
+                                    <p class="profile-subtitle"><?php echo substr($useremail,0,22) ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="../logout.php" ><input type="button" value="Log out" class="logout-btn btn-primary-soft btn"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-dashbord">
+                        <a href="index.php" class="non-style-link-menu"><div><p class="menu-text">Dashboard</p></div></a>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-appoinment">
+                        <a href="appointment.php" class="non-style-link-menu"><div><p class="menu-text">My Appointments</p></div></a>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-session">
+                        <a href="schedule.php" class="non-style-link-menu"><div><p class="menu-text">My Sessions</p></div></a>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-patient">
+                        <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">My Patients</p></div></a>
+                    </td>
+                </tr>
+                <!-- ✅ Active link here -->
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-doctor menu-active menu-icon-dashbord-active">
+                        <a href="other-doctor-activity.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Other Doctors Activity</p></div></a>
+                    </td>
+                </tr>
+                <tr class="menu-row">
+                    <td class="menu-btn menu-icon-settings">
+                        <a href="settings.php" class="non-style-link-menu"><div><p class="menu-text">Settings</p></div></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+        <!-- ✅ Content -->
+        <div class="dash-body" style="margin-top: 15px">
             <h2 style="padding-left:20px">Other <?php echo h($specname); ?> Doctors' Treatment Records</h2>
             
             <center>
@@ -185,5 +218,6 @@ function h($s){
             </center>
         </div>
     </div>
+    <script src="../darkmode.js"></script>
 </body>
 </html>

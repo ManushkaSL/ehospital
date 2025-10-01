@@ -382,6 +382,9 @@ input[type=search]:focus {
 .menu-icon-patient{
   background-image: url('../img/icons/patients.svg');
 }
+.menu-icon-drugs{
+  background-image: url('../img/icons/drugs.svg');
+}
 .menu-icon-settings{
   background-image: url('../img/icons/settings.svg');
 }
