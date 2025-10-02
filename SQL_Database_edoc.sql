@@ -312,3 +312,12 @@ CREATE TABLE delete_requests (
     requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending','approved','rejected') DEFAULT 'pending'
 );
+CREATE TABLE booking (
+    bookingid INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    pid INT(11) NOT NULL,                -- Patient ID
+    docid INT(11) NOT NULL,              -- Doctor ID
+    scheduleid INT(11) NOT NULL,         -- Schedule ID
+    apponum INT(3) NOT NULL,             -- Appointment number
+    appodate DATE NOT NULL            -- Date of booking
+   
+);
