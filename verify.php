@@ -11,6 +11,7 @@ date_default_timezone_set('Asia/Kolkata');
     <meta charset="UTF-8">
     <title>Email Verification</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
     <style>
         body { font-family: Arial, sans-serif; background: #f4f6f9; }
         .container {

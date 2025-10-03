@@ -122,6 +122,7 @@ if (isset($_POST['change_password']) && isset($_SESSION['otp_verified'])) {
 <head>
     <title>Forgot Password</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -203,7 +204,7 @@ if (isset($_POST['change_password']) && isset($_SESSION['otp_verified'])) {
 <body>
     <div class="container">
         <div class="card">
-            <h2>Forgot Password</h2>
+            <h2 class="forgot-password-heading">Forgot Password</h2>
             <?php if($msg): ?>
                 <p class="message" style="color: <?= strpos($msg,'successfully')!==false || strpos($msg,'OTP sent')!==false || strpos($msg,'verified')!==false ? 'green':'red'; ?>;">
                     <?= $msg ?>
@@ -240,5 +241,6 @@ if (isset($_POST['change_password']) && isset($_SESSION['otp_verified'])) {
             <a href="login.php" class="back-link">⬅ Back to Login</a>
         </div>
     </div>
+    <script src="darkmode.js"></script>
 </body>
 </html>
