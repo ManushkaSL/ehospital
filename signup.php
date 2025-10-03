@@ -138,7 +138,6 @@ if (isset($_POST['create_account']) && isset($_SESSION['otp_verified'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <link rel="stylesheet" href="css/dark-mode.css">
     <title>Sign Up - eHospital</title>
     <style>

@@ -6,8 +6,6 @@ body.dark-mode {
     color: #e0e0e0 !important;
 }
 
-
-
 /* Headings */
 body.dark-mode h1,
 body.dark-mode h2,
@@ -150,6 +148,13 @@ body.dark-mode a.non-style-link {
 }
 body.dark-mode .label-td label {
     color: #e7ebf1 !important;
+}
+
+body.dark-mode .card {
+    color: #353430 !important;
+}
+body.dark-mode .card h2.forgot-password-heading {
+    color: #ffffff !important;
 }
 
 body.dark-mode .index-page {
