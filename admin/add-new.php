@@ -13,7 +13,7 @@
         .popup{
             animation: transitionIn-Y-bottom 0.5s;
         }
-</style>
+    </style>
 </head>
 <body>
     <?php
@@ -48,6 +48,14 @@
         $tele=$_POST['Tele'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
+
+        // Get new fields
+        $qualification=$_POST['qualification'];
+        $experience=$_POST['experience'];
+        $hospital=$_POST['hospital'];
+        $consultationFee=$_POST['consultationFee'];
+        $availability=$_POST['availability'];
+        $descripton=$_POST['descripton'];
         
         if ($password==$cpassword){
             $error='3';
@@ -55,9 +63,10 @@
             if($result->num_rows==1){
                 $error='1';
             }else{
-                $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                $sql1="insert into doctor(docemail,docname,docpassword,docnic,doctel,specialties) values('$email','$name','$hasedPassword','$nic','$tele',$spec);";
+                $sql1="INSERT INTO doctor(docemail, docname, docpassword, docnic, doctel, specialties, qualification, experience, hospital, consultationFee, availability, descripton) 
+                       VALUES('$email', '$name', '$hashedPassword', '$nic', '$tele', $spec, '$qualification', '$experience', '$hospital', '$consultationFee', '$availability', '$descripton');";
                 $sql2="insert into webuser values('$email','d')";
                 $database->query($sql1);
                 $database->query($sql2);

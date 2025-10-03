@@ -400,20 +400,36 @@ $specialtiesResult = $database->query($specialtiesQuery);
                             </div>
                             <div class="doctor-details">
                                 <div class="detail-row">
-                                    <span class="detail-label">Email:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['docemail']).'</span>
+                                    <span class="detail-label">Qualification:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['qualification']).'</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Experience:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['experience']).'</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Hospital:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['hospital']).'</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Consultation Fee:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['consultationFee']).'</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label">Phone:</span>
                                     <span class="detail-value">'.htmlspecialchars($doctor['doctel']).'</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">NIC:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['docnic']).'</span>
+                                    <span class="detail-label">Email:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['docemail']).'</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">Doctor ID:</span>
-                                    <span class="detail-value">#'.htmlspecialchars($doctor['docid']).'</span>
+                                    <span class="detail-label">Availability:</span>
+                                    <span class="detail-value">'.htmlspecialchars($doctor['availability']).'</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Description:</span>
+                                    <span class="detail-value">#'.htmlspecialchars($doctor['descripton']).'</span>
                                 </div>
                                 <button class="book-btn" onclick="bookAppointment('.$doctor['docid'].')">
                                     Book Appointment

@@ -21,6 +21,14 @@
         $cpassword=$_POST['cpassword'];
         $id=$_POST['id00'];
         
+         // Get new fields
+        $qualification=$_POST['qualification'];
+        $experience=$_POST['experience'];
+        $hospital=$_POST['hospital'];
+        $consultationFee=$_POST['consultationFee'];
+        $availability=$_POST['availability'];
+        $descripton=$_POST['descripton'];
+
         if ($password==$cpassword){
             $error='3';
             $result= $database->query("select doctor.docid from doctor inner join webuser on doctor.docemail=webuser.email where webuser.email='$email';");
@@ -39,10 +47,23 @@
                 //if($resultqq1->num_rows==1){
                     
             }else{
-                $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
                 //$sql1="insert into doctor(docemail,docname,docpassword,docnic,doctel,specialties) values('$email','$name','$password','$nic','$tele',$spec);";
-                $sql1="update doctor set docemail='$email',docname='$name',docpassword='$hasedPassword',docnic='$nic',doctel='$tele',specialties=$spec where docid=$id ;";
+                $sql1="UPDATE doctor SET 
+                       docemail='$email',
+                       docname='$name',
+                       docpassword='$hashedPassword',
+                       docnic='$nic',
+                       doctel='$tele',
+                       specialties=$spec,
+                       qualification='$qualification',
+                       experience='$experience',
+                       hospital='$hospital',
+                       consultation_fee='$consultationFee',
+                       availability='$availability',
+                       descripton='$descripton'
+                       WHERE docid=$id;";
                 $database->query($sql1);
                 
                 $sql1="update webuser set email='$email' where email='$oldemail' ;";
