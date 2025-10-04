@@ -191,6 +191,7 @@ if (isset($_POST['create_account']) && isset($_SESSION['otp_verified'])) {
             font-size: 14px;
         }
     </style>
+    <link rel="stylesheet" href="css/dark-mode.css">
 </head>
 <body>
 

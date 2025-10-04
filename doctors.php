@@ -433,9 +433,9 @@ $specialtiesResult = $database->query($specialtiesQuery);
 
     <!--<script>
         function bookAppointment(doctorId) {
-            alert('To book an appointment with this doctor, please login or register first.');
-            window.location.href = 'login.php';
+            window.location.href = 'book-appointment.php?docid=' + doctorId;
         }
+
     </script>-->
 </body>
 </html>
