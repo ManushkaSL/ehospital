@@ -98,6 +98,30 @@
             box-shadow: 0 6px 20px rgba(0,153,204,0.5);
         }
 
+        /* View All Doctors Button */
+        .view-all-doctors {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .view-all-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .view-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -118,6 +142,7 @@
                     <font class="edoc-logo">ehospital. </font>
                     <font class="edoc-logo-sub">| THE ECHANNELING PROJECT</font>
                 </td>
+                
                 <td width="10%">
                     <a href="signup.php" class="non-style-link">
                         <p class="nav-item" style="padding-right: 10px;">REGISTER</p>
@@ -140,13 +165,34 @@
             <tr>
                 <td colspan="3">
                 <center>
-                    
+                    <div class="button-group">
+                        <a href="doctors.php" class="view-doctors-btn btn" 
+                           style="padding: 12px 30px; margin-right: 15px;
+                                  background: rgba(255, 255, 255, 0.9);
+                                  color: #0066cc;
+                                  border: 2px solid #0066cc;
+                                  border-radius: 8px;
+                                  text-decoration: none;
+                                  font-weight: 600;
+                                  font-size: 16px;
+                                  display: inline-block;
+                                  transition: all 0.3s;">
+                           VIEW DOCTORS
+                        </a>
                         <a href="login.php" class="login-btn btn-primary btn" 
-                           style="padding-left: 25px;padding-right: 25px;
-                                  padding-top: 10px;padding-bottom: 10px;">
+                           style="padding: 12px 30px;
+                                  background: #0066cc;
+                                  color: white;
+                                  border: 2px solid #0066cc;
+                                  border-radius: 8px;
+                                  text-decoration: none;
+                                  font-weight: 600;
+                                  font-size: 16px;
+                                  display: inline-block;
+                                  transition: all 0.3s;">
                            LOGIN
                         </a>
-                    
+                    </div>
                 </center>
                 </td>
             </tr>
@@ -161,6 +207,9 @@
         <h2 style="text-align:center; margin-bottom:50px; color:#fff;">Our Doctors</h2>
             <div class="doctor-grid ">
                 <?php include("doctors-card.php"); ?>
+            </div>
+            <div class="view-all-doctors">
+                <a href="doctors.php" class="view-all-btn">View All Doctors</a>
             </div>
         </div>
      </div>

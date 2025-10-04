@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/animations.css">  
-    <link rel="stylesheet" href="../css/main.css"> 
-    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/main.css">  
     <link rel="stylesheet" href="../css/admin.css">
         
     <title>Doctor</title>
@@ -14,78 +13,69 @@
         .popup{
             animation: transitionIn-Y-bottom 0.5s;
         }
-</style>
+    </style>
 </head>
 <body>
     <?php
-
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
         if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
             header("location: ../login.php");
         }
-
     }else{
         header("location: ../login.php");
     }
-    
-    
 
     //import database
     include("../connection.php");
 
-
-
     if($_POST){
-        //print_r($_POST);
-        $result= $database->query("select * from webuser");
-        $name=$_POST['name'];
-        $nic=$_POST['nic'];
-        $spec=$_POST['spec'];
-        $email=$_POST['email'];
-        $tele=$_POST['Tele'];
-        $password=$_POST['password'];
-        $cpassword=$_POST['cpassword'];
+        $name = $database->real_escape_string($_POST['name']);
+        $nic = $database->real_escape_string($_POST['nic']);
+        $spec = intval($_POST['spec']);
+        $email = $database->real_escape_string($_POST['email']);
+        $tele = $database->real_escape_string($_POST['Tele']);
+        $password = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
+
+        // Get new fields
+        $qualification = $database->real_escape_string($_POST['qualification']);
+        $experience = $database->real_escape_string($_POST['experience']);
+        $hospital = $database->real_escape_string($_POST['hospital']);
+        $consultationFee = $database->real_escape_string($_POST['consultationFee']);
+        $availability = $database->real_escape_string($_POST['availability']);
+        $descripton = $database->real_escape_string($_POST['descripton']); // Note: descripton not description
         
-        if ($password==$cpassword){
+        if ($password == $cpassword){
             $error='3';
-            $result= $database->query("select * from webuser where email='$email';");
-            if($result->num_rows==1){
+            $result = $database->query("SELECT * FROM webuser WHERE email='$email'");
+            
+            if($result->num_rows == 1){
                 $error='1';
             }else{
-                $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                $sql1="insert into doctor(docemail,docname,docpassword,docnic,doctel,specialties) values('$email','$name','$hasedPassword','$nic','$tele',$spec);";
-                $sql2="insert into webuser values('$email','d')";
-                $database->query($sql1);
-                $database->query($sql2);
-
-                //echo $sql1;
-                //echo $sql2;
-                $error= '4';
+                $sql1 = "INSERT INTO doctor(docemail, docname, docpassword, docnic, doctel, specialties, qualification, experience, hospital, consultationFee, availability, descripton) 
+                       VALUES('$email', '$name', '$hashedPassword', '$nic', '$tele', $spec, '$qualification', '$experience', '$hospital', '$consultationFee', '$availability', '$descripton')";
                 
+                $sql2 = "INSERT INTO webuser VALUES('$email','d')";
+                
+                if($database->query($sql1) && $database->query($sql2)){
+                    $error = '4';
+                }else{
+                    $error = '3';
+                    // For debugging: echo "Error: " . $database->error;
+                }
             }
-            
         }else{
             $error='2';
         }
-    
-    
-        
-        
     }else{
-        //header('location: signup.php');
         $error='3';
     }
-    
 
     header("location: doctors.php?action=add&error=".$error);
     ?>
-    
-   
-
 </body>
 </html>
