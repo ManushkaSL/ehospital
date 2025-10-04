@@ -202,17 +202,7 @@
     </div>
 
     <!-- Doctors Section -->
-     <div class="full-height">
-        <div class="doctor-section">
-        <h2 style="text-align:center; margin-bottom:50px; color:#fff;">Our Doctors</h2>
-            <div class="doctor-grid ">
-                <?php include("doctors-card.php"); ?>
-            </div>
-            <div class="view-all-doctors">
-                <a href="doctors.php" class="view-all-btn">View All Doctors</a>
-            </div>
-        </div>
-     </div>
+     
     
     <script src="darkmode.js"></script>
 </body>

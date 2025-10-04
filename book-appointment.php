@@ -5,7 +5,7 @@ include("connection.php");
 $message = "";
 $showForm = false;
 
-// Get doctor ID from URL (doctor card)
+// Get doctor ID from URL
 $docid = isset($_GET['docid']) ? intval($_GET['docid']) : 0;
 
 // Step 1: Patient login
@@ -36,26 +36,33 @@ if(isset($_POST['book']) && isset($_SESSION['pid'])) {
     $pid = intval($_SESSION['pid']);
     $docid = intval($_POST['docid']); // hidden field
     $appodate = $database->real_escape_string($_POST['appodate']);
-    $apptime = $database->real_escape_string($_POST['apptime']); // optional, for reference
+    $apptime = $database->real_escape_string($_POST['apptime']);
 
-    // Auto increment scheduleid
-    $resMaxSchedule = $database->query("SELECT MAX(scheduleid) AS maxid FROM booking");
-    $rowMax = $resMaxSchedule->fetch_assoc();
-    $scheduleid = $rowMax['maxid'] ? intval($rowMax['maxid']) + 1 : 1;
+    // Insert schedule (AUTO_INCREMENT handles scheduleid)
+    $title = "Appointment for Doctor ID $docid";
+    $sqlSchedule = "INSERT INTO schedule(docid, title, scheduledate, scheduletime, nop)
+                    VALUES ('$docid', '$title', '$appodate', '$apptime', 1)";
+    if($database->query($sqlSchedule)) {
+        $scheduleid = $database->insert_id; // get auto-incremented scheduleid
 
-    // Appointment number = total bookings for this doctor + 1
-    $resAppt = $database->query("SELECT COUNT(*) AS total FROM booking WHERE docid=$docid");
-    $rowAppt = $resAppt->fetch_assoc();
-    $apponum = intval($rowAppt['total']) + 1;
+        // Calculate appointment number (number of appointments for this doctor on this date)
+        $resAppt = $database->query("SELECT COUNT(*) AS total FROM appointment WHERE scheduleid IN 
+            (SELECT scheduleid FROM schedule WHERE docid=$docid AND scheduledate='$appodate')");
+        $rowAppt = $resAppt->fetch_assoc();
+        $apponum = intval($rowAppt['total']) + 1;
 
-    // Insert booking
-    $sqlInsert = "INSERT INTO booking(pid, docid, scheduleid, apponum, appodate)
-                  VALUES ($pid, $docid, $scheduleid, $apponum, '$appodate')";
-    if($database->query($sqlInsert)) {
-        $message = "Booking Successful! Your appointment number is $apponum on $appodate.";
-        $showForm = false;
+        // Insert appointment (AUTO_INCREMENT handles appoid)
+        $sqlAppointment = "INSERT INTO appointment(pid, apponum, scheduleid, appodate)
+                           VALUES ($pid, $apponum, $scheduleid, '$appodate')";
+        if($database->query($sqlAppointment)) {
+            $message = "Booking Successful! Your appointment number is $apponum on $appodate at $apptime.";
+            $showForm = false;
+        } else {
+            $message = "Error creating appointment: " . $database->error;
+            $showForm = true;
+        }
     } else {
-        $message = "Error booking appointment: " . $database->error;
+        $message = "Error creating schedule: " . $database->error;
         $showForm = true;
     }
 }
@@ -87,9 +94,12 @@ if($docid > 0) {
 <link rel="stylesheet" href="../css/main.css">
 <style>
 body { background: #f0f4f8; font-family: Arial, sans-serif; }
-.container { max-width: 600px; margin: 50px auto; padding: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
+.container { max-width: 600px; margin: 50px auto; padding: 20px; 
+             background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); 
+             border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
 h2 { text-align: center; color: #333; }
-input[type="text"], input[type="password"], input[type="date"], input[type="time"], input[type="submit"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
+input[type="text"], input[type="password"], input[type="date"], input[type="time"], input[type="submit"] {
+    width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
 input[type="submit"] { background: #00bfff; color: #fff; border: none; cursor: pointer; }
 input[type="submit"]:hover { background: #009acd; }
 .message { text-align: center; color: green; margin-bottom: 15px; }
@@ -115,16 +125,49 @@ input[type="submit"]:hover { background: #009acd; }
 </form>
 <?php elseif($doctor): ?>
 <!-- Booking Form -->
+<!-- Booking Form -->
+<!-- Booking Form -->
+<!-- Booking Form -->
 <form method="post">
     <p><strong>Doctor Name:</strong> <?php echo $doctor['docname']; ?></p>
     <p><strong>Specialization:</strong> <?php echo $doctor['specialty']; ?></p>
     <input type="hidden" name="docid" value="<?php echo $doctor['docid']; ?>">
+
+    <!-- Appointment Date -->
     <label>Choose Appointment Date</label>
-    <input type="date" name="appodate" required>
-    <label>Choose Appointment Time (for reference)</label>
-    <input type="time" name="apptime" required>
+    <input type="date" name="appodate" required 
+           min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
+
+    <!-- Appointment Time -->
+    <label>Choose Appointment Time</label>
+    <select name="apptime" required>
+        <!-- Morning slots -->
+        <option value="08:00">08:00 AM</option>
+        <option value="08:30">08:30 AM</option>
+        <option value="09:00">09:00 AM</option>
+        <option value="09:30">09:30 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="10:30">10:30 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="11:30">11:30 AM</option>
+        <option value="12:00">12:00 PM</option>
+
+        <!-- Afternoon slots -->
+        <option value="13:00">01:00 PM</option>
+        <option value="13:30">01:30 PM</option>
+        <option value="14:00">02:00 PM</option>
+        <option value="14:30">02:30 PM</option>
+        <option value="15:00">03:00 PM</option>
+        <option value="15:30">03:30 PM</option>
+        <option value="16:00">04:00 PM</option>
+        <option value="16:30">04:30 PM</option>
+    </select>
+
     <input type="submit" name="book" value="Confirm Appointment">
 </form>
+
+
+
 <?php endif; ?>
 
 </div>
