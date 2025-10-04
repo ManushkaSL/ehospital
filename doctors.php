@@ -408,22 +408,6 @@ $specialtiesResult = $database->query($specialtiesQuery);
                                     <span class="detail-value">'.htmlspecialchars($doctor['experience']).'</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">Hospital:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['hospital']).'</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Consultation Fee:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['consultationFee']).'</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Phone:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['doctel']).'</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Email:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['docemail']).'</span>
-                                </div>
-                                <div class="detail-row">
                                     <span class="detail-label">Availability:</span>
                                     <span class="detail-value">'.htmlspecialchars($doctor['availability']).'</span>
                                 </div>
@@ -431,9 +415,7 @@ $specialtiesResult = $database->query($specialtiesQuery);
                                     <span class="detail-label">Description:</span>
                                     <span class="detail-value">#'.htmlspecialchars($doctor['descripton']).'</span>
                                 </div>
-                                <button class="book-btn" onclick="bookAppointment('.$doctor['docid'].')">
-                                    Book Appointment
-                                </button>
+                                
                             </div>
                         </div>';
                     }
@@ -449,12 +431,12 @@ $specialtiesResult = $database->query($specialtiesQuery);
         </div>
     </div>
 
-    <script>
+    <!--<script>
         function bookAppointment(doctorId) {
             window.location.href = 'book-appointment.php?docid=' + doctorId;
         }
 
-    </script>
+    </script>-->
 </body>
 </html>
 <?php

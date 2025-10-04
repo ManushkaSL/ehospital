@@ -201,8 +201,7 @@
         </center>
     </div>
 
-    <!-- Doctors Section -->
-     
+    
     
     <script src="darkmode.js"></script>
 </body>
