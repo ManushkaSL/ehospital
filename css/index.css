@@ -93,3 +93,63 @@ body .index-page {
     background-size: cover;
     min-height: 100vh;
 }
+/* Button Group Styles */
+.button-group {
+    display: inline-flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-doctors-btn {
+    padding: 12px 30px !important;
+    margin-right: 15px;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #0066cc !important;
+    border: 2px solid #0066cc !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.view-doctors-btn:hover {
+    background: #0066cc !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.login-btn {
+    padding: 12px 30px !important;
+    background: #0066cc !important;
+    color: white !important;
+    border: 2px solid #0066cc !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.login-btn:hover {
+    background: #0052a3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.5);
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .view-doctors-btn, .login-btn {
+        margin: 5px 0 !important;
+        width: 200px;
+    }
+}

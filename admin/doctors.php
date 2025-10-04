@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/animations.css">  
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/main.css">  
     <link rel="stylesheet" href="../css/admin.css">
         
     <title>Doctors</title>
@@ -91,6 +90,7 @@
                         <a href="patient.php" class="non-style-link-menu"><div><p class="menu-text">Patients</p></a></div>
                     </td>
                 </tr>
+
                 <tr class="menu-row">
                     <td class="menu-btn menu-icon-drugs">
                         <a href="drugs.php" class="non-style-link-menu"><div><p class="menu-text">Drugs</p></div></a>
@@ -102,6 +102,7 @@
                         <a href="doctors-delete-request.php" class="non-style-link-menu"><div><p class="menu-text">Doctor Deletion Requests</p></div></a>
                     </td>
                 </tr>
+
             </table>
         </div>
         <div class="dash-body">
@@ -319,12 +320,14 @@
             $name=$row["docname"];
             $email=$row["docemail"];
             $spe=$row["specialties"];
-            
-            $spcil_res= $database->query("select sname from specialties where id='$spe'");
-            $spcil_array= $spcil_res->fetch_assoc();
-            $spcil_name=$spcil_array["sname"];
             $nic=$row['docnic'];
             $tele=$row['doctel'];
+            $qualification=$row['qualification'];
+            $experience=$row['experience'];
+            $hospital=$row['hospital'];
+            $consultation_fee=$row['consultation_fee'];
+            $availability=$row['availability'];
+            $descripton=$row['descripton'];
             echo '
             <div id="popup1" class="overlay">
                     <div class="popup">
@@ -453,9 +456,65 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="text" name="name" class="input-text" placeholder="Doctor Name" required><br>
+                                    <input type="text" name="name" class="input-text" placeholder="Doctor Name" value="'.$name.'" required><br>
                                 </td>
                                 
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="qualification" class="form-label">Qualification: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="qualification" class="input-text" placeholder="Qualification" value="'.$qualification.'" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="experience" class="form-label">Experience: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="experience" class="input-text" placeholder="Experience" value="'.$experience.'" required><br>
+
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="hospital" class="form-label">Hospital: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                   <input type="text" name="hospital" class="input-text" placeholder="Hospital" value="'.$hospital.'" required><br>
+
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="consultationFee" class="form-label">Consultation Fee: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="consultationFee" class="input-text" placeholder="Consultation Fee" value="'.$consultation_fee.'" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Tele" class="form-label">Telephone: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="'.$tele.'" required><br>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
@@ -469,23 +528,35 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
+                                    <label for="availibility" class="form-label">Availability: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="availability" class="input-text" placeholder="Availability" value="'.$availability.'" required><br>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="descripton" class="form-label">Description: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="descripton" class="input-text" placeholder="Description" value="'.$descripton.'" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
                                     <label for="nic" class="form-label">NIC: </label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="text" name="nic" class="input-text" placeholder="NIC Number" required><br>
+                                    <input type="text" name="nic" class="input-text" placeholder="NIC Number" value="'.$nic.'" required><br>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="label-td" colspan="2">
-                                    <label for="Tele" class="form-label">Telephone: </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label-td" colspan="2">
-                                    <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" required><br>
-                                </td>
+
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
@@ -591,6 +662,14 @@
             $nic=$row['docnic'];
             $tele=$row['doctel'];
 
+            $qualification=$row['qualification'];
+            $experience=$row['experience'];
+            $hospital=$row['hospital'];
+            $consultation_fee=$row['consultation_fee'];
+            $availability=$row['availability'];
+            $descripton=$row['descripton'];
+
+
             $error_1=$_GET["error"];
                 $errorlist= array(
                     '1'=>'<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
@@ -636,38 +715,103 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        
-                                        <td class="label-td" colspan="2">
-                                            <label for="name" class="form-label">Name: </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-td" colspan="2">
-                                            <input type="text" name="name" class="input-text" placeholder="Doctor Name" value="'.$name.'" required><br>
-                                        </td>
-                                        
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td class="label-td" colspan="2">
-                                            <label for="nic" class="form-label">NIC: </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-td" colspan="2">
-                                            <input type="text" name="nic" class="input-text" placeholder="NIC Number" value="'.$nic.'" required><br>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-td" colspan="2">
-                                            <label for="Tele" class="form-label">Telephone: </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-td" colspan="2">
-                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="'.$tele.'" required><br>
-                                        </td>
-                                    </tr>
+                                <form action="add-new.php" method="POST" class="add-new-form">
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Name: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="name" class="input-text" placeholder="Doctor Name" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="qualification" class="form-label">Qualification: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="qualification" class="input-text" placeholder="Qualification" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="experience" class="form-label">Experience: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="experience" class="input-text" placeholder="Experience" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="hospital" class="form-label">Hospital: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="hospital" class="input-text" placeholder="Hospital" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="consultationFee" class="form-label">Consultation Fee: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="consultationFee" class="input-text" placeholder="Consultation Fee" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Tele" class="form-label">Telephone: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="avalibility" class="form-label">Avalability: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="avalability" class="input-text" placeholder="Avalability" required><br>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="descripton" class="form-label">Description: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="descripton" class="input-text" placeholder="Description" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="nic" class="form-label">NIC: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="nic" class="input-text" placeholder="NIC Number" required><br>
+                                </td>
+
+                            </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
                                             <label for="spec" class="form-label">Choose specialties: (Current'.$spcil_name.')</label>
