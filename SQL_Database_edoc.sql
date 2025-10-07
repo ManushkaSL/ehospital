@@ -317,7 +317,6 @@ CREATE TABLE delete_requests (
 ALTER TABLE doctor 
 ADD COLUMN qualification VARCHAR(255) DEFAULT NULL AFTER specialties,
 ADD COLUMN experience VARCHAR(100) DEFAULT NULL AFTER qualification,
-ADD COLUMN hospital VARCHAR(255) DEFAULT NULL AFTER experience,
 ADD COLUMN consultationFee VARCHAR(50) DEFAULT NULL AFTER hospital,
 ADD COLUMN availability VARCHAR(255) DEFAULT NULL AFTER consultationFee,
 ADD COLUMN descripton TEXT DEFAULT NULL AFTER availability;

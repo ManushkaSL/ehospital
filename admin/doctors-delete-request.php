@@ -137,7 +137,7 @@ $result = $database->query($sql);
 
                 <!-- Active: Doctor Deletion Requests (matches index.php style exactly) -->
                 <tr class="menu-row">
-                    <td class="menu-btn menu-icon-delete-request menu-active">
+                    <td class="menu-btn menu-icon-delete-request menu-active menu-icon-delete-request-active">
                         <a href="doctors-delete-request.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Doctor Deletion Requests</p></div></a>
                     </td>
                 </tr>

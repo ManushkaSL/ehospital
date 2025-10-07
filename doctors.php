@@ -407,10 +407,7 @@ $specialtiesResult = $database->query($specialtiesQuery);
                                     <span class="detail-label">Experience:</span>
                                     <span class="detail-value">'.htmlspecialchars($doctor['experience']).'</span>
                                 </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Hospital:</span>
-                                    <span class="detail-value">'.htmlspecialchars($doctor['hospital']).'</span>
-                                </div>
+                                
                                 <div class="detail-row">
                                     <span class="detail-label">Consultation Fee:</span>
                                     <span class="detail-value">'.htmlspecialchars($doctor['consultationFee']).'</span>

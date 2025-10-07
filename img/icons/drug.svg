@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="#3b3b3b">
+  <g>
+    <rect fill="none" height="24" width="24"/>
+  </g>
+  <g>
+    <!-- Capsule / pill icon styled to match the doctor icon -->
+    <g transform="rotate(-45 12 12)">
+      <rect x="5" y="9" width="14" height="6" rx="3" fill="#3b3b3b"/>
+      <!-- division line (cutout) -->
+      <rect x="11" y="9" width="2" height="6" rx="1" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

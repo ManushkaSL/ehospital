@@ -127,7 +127,7 @@ $result = $database->query("SELECT * FROM drugs ORDER BY drug_name ASC");
 
                 <!-- Active Drugs -->
                 <tr class="menu-row">
-                    <td class="menu-btn menu-icon-drugs menu-active">
+                    <td class="menu-btn menu-icon-drugs menu-active menu-icon-drug-active">
                         <a href="drugs.php" class="non-style-link-menu non-style-link-menu-active"><div><p class="menu-text">Drugs</p></div></a>
                     </td>
                 </tr>

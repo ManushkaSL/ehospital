@@ -383,7 +383,10 @@ input[type=search]:focus {
   background-image: url('../img/icons/patients.svg');
 }
 .menu-icon-drugs{
-  background-image: url('../img/icons/drugs.svg');
+  background-image: url('../img/icons/drug.svg');
+}
+.menu-icon-delete-request{
+  background-image: url('../img/icons/deleteRequest.svg');
 }
 .menu-icon-settings{
   background-image: url('../img/icons/settings.svg');
@@ -423,6 +426,16 @@ input[type=search]:focus {
   color: var(--primarycolor);
   
   background-image: url('../img/icons/patients-hover.svg');
+}
+.menu-icon-drugs:hover,.menu-icon-drug-active{
+  color: var(--primarycolor);
+  
+  background-image: url('../img/icons/drug-hover.svg');
+}
+.menu-icon-delete-request:hover,.menu-icon-delete-request-active{
+  color: var(--primarycolor);
+  
+  background-image: url('../img/icons/deleteRequest-hover.svg');
 }
 
 .menu-icon-settings:hover,.menu-icon-settings-active{
