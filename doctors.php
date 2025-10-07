@@ -342,7 +342,6 @@ $specialtiesResult = $database->query($specialtiesQuery);
                 </div>
                 <nav class="nav-links">
                     <a href="index.php" class="nav-item">HOME</a>
-                    <!--<a href="doctors.php" class="nav-item">DOCTORS</a>-->
                     <a href="signup.php" class="nav-item">REGISTER</a>
                     <a href="login.php" class="nav-item">LOGIN</a>
                 </nav>
@@ -379,7 +378,7 @@ $specialtiesResult = $database->query($specialtiesQuery);
                 <?php
                 if ($result->num_rows > 0) {
                     while($doctor = $result->fetch_assoc()) {
-                        // Get initials for avatar
+                        // Get initials (fallback)
                         $nameParts = explode(' ', $doctor['docname']);
                         $initials = '';
                         foreach($nameParts as $part) {
@@ -388,15 +387,28 @@ $specialtiesResult = $database->query($specialtiesQuery);
                         if(strlen($initials) > 2) {
                             $initials = substr($initials, 0, 2);
                         }
-                        
-                        echo '
-                        <div class="doctor-card fade-in">
-                            <div class="doctor-header">
-                                <div class="doctor-avatar">'.$initials.'</div>
-                                <div class="doctor-info">
-                                    <h3>'.htmlspecialchars($doctor['docname']).'</h3>
-                                    <div class="specialty">'.htmlspecialchars($doctor['specialty_name']).'</div>
-                                </div>
+
+                        // Doctor image path
+                        $imagePath = "img/doctors/" . $doctor['docid'] . ".jpg";
+                        $hasImage = file_exists($imagePath);
+
+                        echo '<div class="doctor-card fade-in">
+                                <div class="doctor-header">';
+
+                        // Show image if exists
+                        if ($hasImage) {
+                            echo '<div class="doctor-avatar" style="background:none;padding:0;">
+                                    <img src="'.$imagePath.'" alt="Doctor Photo" 
+                                         style="width:80px;height:80px;border-radius:50%;object-fit:cover;">
+                                  </div>';
+                        } else {
+                            echo '<div class="doctor-avatar">'.$initials.'</div>';
+                        }
+
+                        echo '<div class="doctor-info">
+                                <h3>'.htmlspecialchars($doctor['docname']).'</h3>
+                                <div class="specialty">'.htmlspecialchars($doctor['specialty_name']).'</div>
+                              </div>
                             </div>
                             <div class="doctor-details">
                                 <div class="detail-row">
@@ -431,7 +443,6 @@ $specialtiesResult = $database->query($specialtiesQuery);
                                     <span class="detail-label">Description:</span>
                                     <span class="detail-value">#'.htmlspecialchars($doctor['descripton']).'</span>
                                 </div>
-                                
                             </div>
                         </div>';
                     }
@@ -446,13 +457,6 @@ $specialtiesResult = $database->query($specialtiesQuery);
             </div>
         </div>
     </div>
-
-    <!--<script>
-        function bookAppointment(doctorId) {
-            window.location.href = 'book-appointment.php?docid=' + doctorId;
-        }
-
-    </script>-->
 </body>
 </html>
 <?php
