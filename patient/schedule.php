@@ -329,5 +329,10 @@
 
     </div>
 <script src="../darkmode.js"></script>
+    <?php
+    if (file_exists(__DIR__ . '/../chatbot/chatbotWidget.php')) {
+        include __DIR__ . '/../chatbot/chatbotWidget.php';
+    }
+    ?>
 </body>
 </html>

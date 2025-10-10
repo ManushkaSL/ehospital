@@ -218,6 +218,7 @@
                                                         <div>
                                                                 <div class="h1-dashboard">
                                                                     <?php    echo $doctorrow->num_rows  ?>
+                                                            
                                                                 </div><br>
                                                                 <div class="h3-dashboard">
                                                                     All Doctors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -399,5 +400,10 @@
     
 
 <script src="../darkmode.js"></script>
+    <?php
+    if (file_exists(__DIR__ . '/../chatbot/chatbotWidget.php')) {
+        include __DIR__ . '/../chatbot/chatbotWidget.php';
+    }
+    ?>
 </body>
 </html>

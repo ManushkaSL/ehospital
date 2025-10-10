@@ -12,7 +12,9 @@ const typingIndicator = document.getElementById("typingIndicator");
 // -----------------------------
 // Open chatbot with animation
 // -----------------------------
-openBtn.addEventListener("click", () => {
+openBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   chatPopup.style.display = "flex";
   openBtn.style.display = "none";
   setTimeout(() => chatPopup.style.opacity = "1", 10);
@@ -21,7 +23,9 @@ openBtn.addEventListener("click", () => {
 // -----------------------------
 // Close chatbot with animation
 // -----------------------------
-closeBtn.addEventListener("click", () => {
+closeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   chatPopup.style.opacity = "0";
   setTimeout(() => {
     chatPopup.style.display = "none";
@@ -38,12 +42,49 @@ messageInput.addEventListener("input", () => {
 });
 
 // -----------------------------
-// Enter key handling
+// Send handling (wired to send button and Enter key)
 // -----------------------------
+const sendBtn = document.getElementById("sendBtn");
+
+async function sendMessage() {
+  const msg = messageInput.value.trim();
+  if (!msg) return;
+
+  // Add user message
+  const userMsg = createMessageElement(msg, true);
+  chatBody.appendChild(userMsg);
+  scrollToBottom();
+
+  // Clear input
+  messageInput.value = "";
+  messageInput.style.height = "auto";
+
+  // Show typing indicator
+  showTypingIndicator();
+
+  // Generate bot response
+  const botReply = await generateBotResponse(msg);
+
+  hideTypingIndicator();
+  const botMsg = createMessageElement(botReply, false);
+  chatBody.appendChild(botMsg);
+  scrollToBottom();
+}
+
+// Wire send button if present
+if (sendBtn) {
+  sendBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    sendMessage();
+  });
+}
+
+// Enter key: send when Enter pressed without Shift; otherwise allow newline
 messageInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
-    chatForm.dispatchEvent(new Event("submit"));
+    sendMessage();
   }
 });
 
@@ -84,7 +125,7 @@ function createMessageElement(text, isUser = false) {
     `;
   } else {
     messageDiv.innerHTML = `
-      <img class="botAvatar" src="assets/botLogoDark.png" alt="Bot Avatar">
+      <div class="botAvatar" style="display: flex; align-items: center; justify-content: center; font-size: 18px;">🤖</div>
       <div class="messageText">
         <div class="messageContent">${formatBotMessage(text)}</div>
       </div>
@@ -119,10 +160,14 @@ function escapeHtml(text) {
 async function generateBotResponse(userMessage) {
   try {
     console.log("Sending message to backend:", userMessage);
+    // Attach minimal session info if available
+    const user = (typeof window !== 'undefined' && window.chatUser) ? window.chatUser : { email: '', usertype: '' };
+    const payload = { message: userMessage, user };
+
     const res = await fetch("http://localhost:3000/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userMessage })
+      body: JSON.stringify(payload)
     });
     console.log("Backend response status:", res.status);
     
@@ -139,35 +184,13 @@ async function generateBotResponse(userMessage) {
   }
 }
 
-// -----------------------------
-// Handle form submit
-// -----------------------------
-chatForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const msg = messageInput.value.trim();
-  if (!msg) return;
-
-  // Add user message
-  const userMsg = createMessageElement(msg, true);
-  chatBody.appendChild(userMsg);
-  scrollToBottom();
-
-  // Clear input
-  messageInput.value = "";
-  messageInput.style.height = "auto";
-
-  // Show typing indicator
-  showTypingIndicator();
-
-  // Generate bot response
-  const botReply = await generateBotResponse(msg);
-
-  hideTypingIndicator();
-  const botMsg = createMessageElement(botReply, false);
-  chatBody.appendChild(botMsg);
-  scrollToBottom();
-});
+// If the chatForm is a real form elsewhere, prevent it from submitting when Enter is pressed inside our textarea.
+if (chatForm && chatForm.tagName === 'FORM') {
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+}
 
 // -----------------------------
 // Initialization

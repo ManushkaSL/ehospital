@@ -147,6 +147,11 @@ if ($_POST) {
 </center>
 
 <script src="darkmode.js"></script>
-
+<?php
+// Include chatbot widget
+if (file_exists(__DIR__ . '/chatbot/chatbotWidget.php')) {
+    include __DIR__ . '/chatbot/chatbotWidget.php';
+}
+?>
 </body>
 </html>

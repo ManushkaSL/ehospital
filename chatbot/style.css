@@ -1,89 +1,6 @@
 /* Import Google font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
-
-body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Animated background particles */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  animation: float 15s infinite ease-in-out;
-}
-
-.particle:nth-child(1) {
-  width: 80px;
-  height: 80px;
-  top: 10%;
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.particle:nth-child(2) {
-  width: 120px;
-  height: 120px;
-  top: 60%;
-  left: 70%;
-  animation-delay: 2s;
-}
-
-.particle:nth-child(3) {
-  width: 60px;
-  height: 60px;
-  top: 80%;
-  left: 10%;
-  animation-delay: 4s;
-}
-
-.particle:nth-child(4) {
-  width: 100px;
-  height: 100px;
-  top: 30%;
-  left: 80%;
-  animation-delay: 1s;
-}
-
-.particle:nth-child(5) {
-  width: 70px;
-  height: 70px;
-  top: 50%;
-  left: 40%;
-  animation-delay: 3s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-30px) rotate(180deg);
-    opacity: 0.6;
-  }
-}
-
 /* Floating open button */
 .chatBotToggle {
   position: fixed;
@@ -92,8 +9,11 @@ body {
   border: none;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  font-size: 2.5rem;
-  padding: 18px;
+  /* slightly larger for better visibility */
+  font-size: 1.6rem;
+  width: 64px;
+  height: 64px;
+  padding: 0;
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
   cursor: pointer;
@@ -121,7 +41,7 @@ body {
   position: fixed;
   bottom: 100px;
   right: 30px;
-  width: 420px;
+  width: 480px;
   max-width: calc(100vw - 40px);
   background: #ffffff;
   border-radius: 20px;
@@ -185,8 +105,8 @@ body {
 }
 
 .headerInfo .logo {
-  height: 45px;
-  width: 45px;
+  height: 55px;
+  width: 55px;
   border-radius: 50%;
   background: white;
   padding: 2px;
@@ -221,6 +141,7 @@ body {
   font-size: 1.3rem;
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
 }
 
 .statusText {
@@ -295,8 +216,8 @@ body {
 }
 
 .messageBotMessage .botAvatar {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   flex-shrink: 0;
@@ -344,8 +265,8 @@ body {
 }
 
 .typingIndicator .botAvatar {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   flex-shrink: 0;
@@ -396,10 +317,23 @@ body {
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* Footer form layout: ensure textarea and send button align vertically */
 .chatForm {
   display: flex;
-  align-items: flex-end;
+  align-items: center; /* center controls vertically */
   gap: 8px;
+  isolation: isolate;
+  position: relative;
+}
+
+.chatBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 520px;
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
 }
 
 .messageInput {
@@ -413,6 +347,7 @@ body {
   max-height: 120px;
   transition: border-color 0.2s ease;
   line-height: 1.5;
+  font-family: "Inter", sans-serif;
 }
 
 .messageInput:focus {
@@ -423,6 +358,7 @@ body {
 .chatControls {
   display: flex;
   gap: 6px;
+  align-items: center; /* vertically center buttons inside the controls */
 }
 
 .controlBtn {
@@ -447,11 +383,12 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 50%;
-  padding: 10px;
-  font-size: 1.3rem;
+  padding: 12px;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  align-self: center; /* ensure the send button sits centered next to the textarea */
 }
 
 .sendBtn:hover {
@@ -466,14 +403,39 @@ body {
 /* Responsive design */
 @media (max-width: 480px) {
   .chatbotPopup {
-    width: calc(100vw - 20px);
-    right: 10px;
-    bottom: 80px;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 420px;
+    max-width: calc(100vw - 40px);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10001;  /* CHANGE THIS */
+    animation: slideUp 0.3s ease;
+    backdrop-filter: blur(10px);
   }
   
   .chatBotToggle {
-    bottom: 20px;
-    right: 20px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.4rem;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10000;  /* ← UPDATED */
+    animation: pulse 2s infinite;
   }
   
   .chatBody {
